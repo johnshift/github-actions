@@ -20,10 +20,13 @@ jobs:
           echo "env msg#1: ${{ env.msg_1 }}"
           echo "GITHUB_REPOSITORY: $GITHUB_REPOSITORY"
           echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
-      - name: clone repo
+      - name: clone this repo
         uses: actions/checkout@v2
         with:
           repository: 'johnshift/github-actions'
           path: 'my-repo'
+
+      - name: check cloned repo
         run: |
-          echo "ls GITHUB_WORKSPACE: ";ls
+          echo "should place github-actions inside my-repo folder"
+          ls -la $GITHUB_WORKSPACE

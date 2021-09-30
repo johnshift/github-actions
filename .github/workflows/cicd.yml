@@ -13,4 +13,4 @@ jobs:
         run: |
           echo "HOLY SHIT"
           echo "pwd: $PWD"
-          Echo "pwd: ${PWD}"
+          echo "pwd: ${PWD}"

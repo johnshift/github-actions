@@ -35,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: backend/frontend
-          path: $GITHUB_WORKSPACE
+          path: ${{github.workspace}}
 
       # - name: echo workspace before setup
       #   run: tree -d -L 2 $GITHUB_WORKSPACE
@@ -61,6 +61,9 @@ jobs:
 
       - name: install tree
         run: sudo apt install tree -y
+
+      - name: echo GITHUB_WORKSPACE before download
+        run: tree -d -L 2 $GITHUB_WORKSPACE
 
       - name: download backend/frontend 
         uses: actions/download-artifact@v2

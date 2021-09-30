@@ -18,5 +18,12 @@ jobs:
           echo "pwd: $PWD"
           echo "home: $HOME"
           echo "env msg#1: ${{ env.msg_1 }}"
-          echo "next line would be 'ls':"
-          ls
+          echo "GITHUB_REPOSITORY: $GITHUB_REPOSITORY"
+          echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+      - name: clone repo
+        uses: actions/checkout@v2
+        with:
+          repository: 'johnshift/github-actions'
+          path: 'my-repo'
+        run: |
+          echo "ls GITHUB_WORKSPACE: ";ls

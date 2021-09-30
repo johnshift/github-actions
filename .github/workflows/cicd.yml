@@ -38,8 +38,7 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Frontend build + tests
+      - name: Frontend build
         run: |
           yarn install
           yarn build
-          yarn test

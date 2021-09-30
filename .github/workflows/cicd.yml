@@ -5,12 +5,18 @@ on:
 
 jobs:
 
+
   echo:
     name: Echo
     runs-on: ubuntu-latest
+    env:
+      msg_1: "this is message #1"
     steps:
       - name: Echo tests
         run: |
           echo "HOLY SHIT"
           echo "pwd: $PWD"
-          echo "pwd: ${PWD}"
+          echo "home: $HOME"
+          echo "env msg#1: ${{ env.msg_1 }}"
+          echo "next line would be 'ls':"
+          ls

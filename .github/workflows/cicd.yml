@@ -36,5 +36,4 @@ jobs:
           node-version: '14'
 
       - name: Frontend build + tests
-        working-directory: $GITHUB_WORKSPACE/frontend
         run: npm build && npm test

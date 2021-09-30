@@ -12,6 +12,10 @@ jobs:
     env:
       msg_1: "this is message #1"
     steps:
+      - name: install tree
+        run: |
+          sudo apt install tree -y
+
       - name: Echo tests
         run: |
           echo "HOLY SHIT"
@@ -20,16 +24,19 @@ jobs:
           echo "env msg#1: ${{ env.msg_1 }}"
           echo "GITHUB_REPOSITORY: $GITHUB_REPOSITORY"
           echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+
       - name: clone this repo
         uses: actions/checkout@v2
         with:
           repository: 'johnshift/github-actions'
+          path: github-actions
 
       - name: clone my other repo
         uses: actions/checkout@v2
         with:
           repository: 'johnshift/simple-frontend'
+          path: simple-frontend
 
       - name: check cloned repos
         run: |
-          ls -la $GITHUB_WORKSPACE
+          tree -d -L 2 $GITHUB_WORKSPACE

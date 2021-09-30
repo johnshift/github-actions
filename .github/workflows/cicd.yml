@@ -34,7 +34,7 @@ jobs:
       - name: upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: backend/frontend
+          name: backend_frontend_repos
           path: ${{github.workspace}}
 
       # - name: echo workspace before setup
@@ -68,7 +68,7 @@ jobs:
       - name: download backend/frontend 
         uses: actions/download-artifact@v2
         with:
-          name: backend/frontend
+          name: backend_frontend_repos
 
       - name: echo GITHUB_WORKSPACE after download
         run: tree -d -L 2 $GITHUB_WORKSPACE

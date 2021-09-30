@@ -36,4 +36,4 @@ jobs:
           node-version: '14'
 
       - name: Frontend build + tests
-        run: npm build && npm test
+        run: npm install && npm build && npm test

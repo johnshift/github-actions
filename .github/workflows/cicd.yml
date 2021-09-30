@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      - name: install tree
+        run: sudo apt install tree -y
+
       # saved in $GITHUB_WORKSPACE/backend
       - name: checkout backend
         uses: actions/checkout@v2
@@ -24,12 +27,17 @@ jobs:
           repository: 'johnshift/simple-frontend'
           path: frontend
 
+      - name: echo GITHUB_WORKSPACE
+        run: tree -d -L 2 $GITHUB_WORKSPACE
+
+      - run: cd $GITHUB_WORKSPACE/backend
       - name: setup backend
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
           java-version: '11'
 
+      - run: cd $GITHUB_WORKSPACE/frontend
       - name: setup frontend
         uses: actions/setup-node@v2
         with:

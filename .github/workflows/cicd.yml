@@ -30,8 +30,8 @@ jobs:
         with:
           repository: 'johnshift/simple-frontend'
           
-      - name: echo npm & node versions
-        run: npm --version && node --version
+      - name: install yarn
+        run: npm install -g yarn
 
       - name: setup frontend
         uses: actions/setup-node@v2
@@ -39,4 +39,7 @@ jobs:
           node-version: '14'
 
       - name: Frontend build + tests
-        run: npm install && npm build && npm test
+        run: |
+          yarn install
+          yarn build
+          yarn test

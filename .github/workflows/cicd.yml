@@ -27,37 +27,55 @@ jobs:
           repository: 'johnshift/simple-frontend'
           path: frontend
 
-      - name: echo workspace before setup
+      - name: echo workspace after checkouts
         run: tree -d -L 2 $GITHUB_WORKSPACE
 
-      - run: cd $GITHUB_WORKSPACE/backend
-      - name: setup backend
-        uses: actions/setup-java@v2
+      # move files across jobs
+      - name: upload artifact
+        uses: actions/upload-artifact@v2
         with:
-          distribution: 'adopt'
-          java-version: '11'
+          name: backend/frontend
+          path: $GITHUB_WORKSPACE
 
-      - run: cd $GITHUB_WORKSPACE/frontend
-      - name: setup frontend
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
+      # - name: echo workspace before setup
+      #   run: tree -d -L 2 $GITHUB_WORKSPACE
 
-      - name: echo workspace before setup
-        run: tree -d -L 2 $GITHUB_WORKSPACE
+      # - run: cd $GITHUB_WORKSPACE/backend
+      # - name: setup backend
+      #   uses: actions/setup-java@v2
+      #   with:
+      #     distribution: 'adopt'
+      #     java-version: '11'
+
+      # - run: cd $GITHUB_WORKSPACE/frontend
+      # - name: setup frontend
+      #   uses: actions/setup-node@v2
+      #   with:
+      #     node-version: '14'
 
   build_and_test:
     name: Build and Test
     runs-on: ubuntu-latest
     needs: [setup]
     steps:
-    
-      - run: cd $GITHUB_WORKSPACE/backend
-      - name: Backend build + tests
-        working-directory: $GITHUB_WORKSPACE/backend
-        run: mvn clean install
+
+      - name: install tree
+        run: sudo apt install tree -y
+
+      - name: download backend/frontend 
+        uses: actions/download-artifact@v2
+        with:
+          name: backend/frontend
+
+      - name: echo GITHUB_WORKSPACE after download
+        run: tree -d -L 2 $GITHUB_WORKSPACE
+
+      # - run: cd $GITHUB_WORKSPACE/backend
+      # - name: Backend build + tests
+      #   working-directory: $GITHUB_WORKSPACE/backend
+      #   run: mvn clean install
       
-      - run: cd $GITHUB_WORKSPACE/frontend
-      - name: Frontend build + tests
-        working-directory: $GITHUB_WORKSPACE/frontend
-        run: npm build && npm test
+      # - run: cd $GITHUB_WORKSPACE/frontend
+      # - name: Frontend build + tests
+      #   working-directory: $GITHUB_WORKSPACE/frontend
+      #   run: npm build && npm test

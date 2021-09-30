@@ -24,9 +24,12 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: 'johnshift/github-actions'
-          path: 'my-repo'
 
-      - name: check cloned repo
+      - name: clone my other repo
+        uses: actions/checkout@v2
+        with:
+          repository: 'johnshift/simple-frontend'
+
+      - name: check cloned repos
         run: |
-          echo "should place github-actions inside my-repo folder"
           ls -la $GITHUB_WORKSPACE
